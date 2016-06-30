@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    <script>
+      var geocoder = new google.maps.Geocoder;
+      var geocodeLatLng = function(geocoder) {
+        var input = document.getElementById('location-text').innerHTML;
+        console.log("Input string is: " + input);
+        var latlngStr = input.split(',', 2);
+        console.log("Input is split into: " + latlngStr[0] + " and " + latlngStr[1]);
+        var latlng = {
+          lat: parseFloat(latlngStr[0]),
+          lng: parseFloat(latlngStr[1])
+          //lat: 12.9601508,
+          //lng: 77.7159555
+        };
+
+        geocoder.geocode({'location': latlng}, function(results, status){
+          if (status === google.maps.GeocoderStatus.OK)
+          {
+            if (results[1])
+            {
+              console.log(results[1].formatted_address);
+              document.getElementById('address').innerHTML = "Your location is " + results[0].formatted_address;
+            }
+            else {
+              window.alert("No results found")
+            }
+          }
+          else {
+            window.alert("Geocoder failed due to " + status)
+          }
+        });
+
+      }
+
+      var getLocation = function()
+      {
+        if ("geolocation" in navigator)
+        {
+
+          console.log("Getting position");
+          navigator.geolocation.getCurrentPosition(function(location) {
+          console.log(location.coords.latitude);
+          console.log(location.coords.longitude);
+          document.getElementById("location-text").innerHTML = location.coords.latitude + "," + location.coords.longitude;
+          geocodeLatLng(geocoder);
+      });
+        }
+        else
+        {
+          alert("ERROR: GEOLOCATION NOT FOUND");
+        }
+
+      }
+
+    </script>
+    <link rel="stylesheet" href="style.css">
+
+    <nav class="navbar navbar-default" role="navigation" id="navbar">
+      <div class="container">
+        <a class="navbar-brand">Home</a>
+        <ul class="nav navbar-nav">
+          <li><a class="navbar-link">About Us</a></li>
+          <li><a class="navbar-link">Showcase</a></li>
+          <li><a class="navbar-link">Contact</a></li>
+          <li><a class="navbar-link">Forums</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container" id="main">
+      <button type="button" class="btn btn-default" onclick="getLocation()" id="get-location-button"><span class="glyphicon glyphicon-globe"></span> Get my location</a></button>
+      <p id="location-text"></p>
+      <p id="address"></p>
+    </div>
+
+    <hr>
+
+    <div class="container" id="footer">
+      <table class="table table-borderless">
+        <tr class="table-borderless">
+          <th>Heading 1</th>
+          <th>Heading 2</th>
+          <th>Heading 3</th>
+          <th>Heading 4</th>
+        </tr>
+        <tr>
+          <td>Item 1</td>
+          <td>Item 1</td>
+          <td>Item 1</td>
+          <td>Item 1</td>
+        </tr>
+        <tr>
+          <td>Item 2</td>
+          <td>Item 2</td>
+          <td>Item 2</td>
+          <td>Item 2</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
