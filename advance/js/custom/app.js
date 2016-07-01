@@ -1,8 +1,11 @@
 var app = angular.module('Geolocation', []);
 
-app.controller('GeolocationController', ['$scope', function($scope) {
+app.controller('GeolocationController', function($scope) {
 
     $scope.geocoder = new google.maps.Geocoder;
+    $scope.uaddress = '';
+    $scope.ulocation = '';
+
 
     $scope.geoProcess = function() {
         console.log("geoProcess processing");
@@ -21,6 +24,7 @@ app.controller('GeolocationController', ['$scope', function($scope) {
                 console.log(location.coords);
 
                 $scope.ulocation = location.coords.latitude + ',' + location.coords.longitude;
+                $scope.$apply();
                 $scope.geoAddress($scope.geocoder);
             });
 
@@ -52,7 +56,8 @@ app.controller('GeolocationController', ['$scope', function($scope) {
             if (status === google.maps.GeocoderStatus.OK) {
                 if (results[1]) {
                     console.log(results[1].formatted_address);
-                    $scope.addressText = "Your location is " + results[0].formatted_address;
+                    $scope.uaddress = "Your location is " + results[0].formatted_address;
+                    $scope.$apply();
                     console.log("Successfully wrote the address to addressText");
                 } else {
                     window.alert("No results found")
@@ -65,4 +70,4 @@ app.controller('GeolocationController', ['$scope', function($scope) {
     }
 
 
-}]);
+});
