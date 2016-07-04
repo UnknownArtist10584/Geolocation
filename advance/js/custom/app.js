@@ -58,7 +58,7 @@ app.controller('GeolocationController', function($scope) {
                     console.log(results[1].formatted_address);
                     $scope.uaddress = "Your location is " + results[0].formatted_address;
                     $scope.$apply();
-                    console.log("Successfully wrote the address to addressText");
+                    console.log("Successfully wrote the address to uaddress");
                 } else {
                     window.alert("No results found")
                 }
