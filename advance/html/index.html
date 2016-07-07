@@ -1,68 +1,125 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="Geolocation">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-    <!-- AngularJS -->
-    <script src="../js/lib/ng/angular.js"></script>
-    <script src="../js/lib/ng/angular-route.js"></script>
-    <script src="../js/lib/ng/angular-resource.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="../css/lib/bootstrap/bootstrap.min.css">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <!-- AngularJS -->
+        <script src="../js/lib/ng/angular.js"></script>
+        <script src="../js/lib/ng/angular-route.js"></script>
+        <script src="../js/lib/ng/angular-resource.js"></script>
+        <script src="../js/lib/ng/angular-animate.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="../css/lib/bootstrap/bootstrap.min.css">
 
-    <!-- jQuery library -->
-    <script src="../js/lib/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="../js/lib/bootstrap/bootstrap.min.js"></script>
-    <!-- Google maps -->
-    <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxgkBVh6-WpUEXikBI1ajwqpbv5KRWQs4">
-    </script>
+        <!-- jQuery library -->
+        <script src="../js/lib/jquery/jquery-2.2.4.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="../js/lib/bootstrap/bootstrap.min.js"></script>
+        <!-- Google maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxgkBVh6-WpUEXikBI1ajwqpbv5KRWQs4"></script>
 
-    <script src="../js/custom/app.js"></script>
-    <link rel="stylesheet" href="../css/custom/style.css">
-  </head>
-  <body>
-    <nav class="navbar navbar-default" role="navigation" id="navbar">
-      <div class="container">
-        <a class="navbar-brand">Home</a>
-        <ul class="nav navbar-nav">
-          <li><a class="navbar-link">About Us</a></li>
-          <li><a class="navbar-link">Showcase</a></li>
-          <li><a class="navbar-link">Contact</a></li>
-          <li><a class="navbar-link">Forums</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div class="container" id="main" ng-controller="GeolocationController">
-      <button type="button" class="btn btn-default" id="get-location-button" ng-click="geoProcess()"><span class="glyphicon glyphicon-globe"></span> Get my location</a></button>
-      <div id="location">Your location will appear here : {{ulocation}}</div>
-      <div id="address">Your address will appear here : {{uaddress}}</div>
-    </div>
-    <hr>
-    <div class="container" id="footer">
-      <table class="table table-borderless">
-        <tr class="table-borderless">
-          <th>Heading 1</th>
-          <th>Heading 2</th>
-          <th>Heading 3</th>
-          <th>Heading 4</th>
-        </tr>
-        <tr>
-          <td>Item 1</td>
-          <td>Item 1</td>
-          <td>Item 1</td>
-          <td>Item 1</td>
-        </tr>
-        <tr>
-          <td>Item 2</td>
-          <td>Item 2</td>
-          <td>Item 2</td>
-          <td>Item 2</td>
-        </tr>
-      </table>
-    </div>
-  </body>
+        <script src="../js/lib/angular-bootstrap/ui-bootstrap-tpls-1.3.3.js"></script>
+
+        <script src="../js/custom/app.js"></script>
+        <link rel="stylesheet" href="../css/custom/style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-default" role="navigation" id="navbar">
+            <div class="container">
+                <a class="navbar-brand">Home</a>
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="">Action</a>
+                            </li>
+                            <li>
+                                <a href="">Another action</a>
+                            </li>
+                            <li>
+                                <a href="">Something else here</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="">Separated link</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Showcase<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">Action</a>
+                            </li>
+                            <li>
+                                <a href="#">Action 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Action 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Action 4</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contact<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">Pricing</a>
+                            </li>
+                            <li>
+                                <a href="#">Customer Support</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="navbar-title">
+                        <a class="navbar-link">Forums</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container" id="main" ng-controller="GeolocationController">
+            <button type="button" class="btn btn-default" id="get-location-button" ng-click="geoProcess()">
+                <span class="glyphicon glyphicon-globe"></span>
+                Get my location
+            </button>
+            <div id="loader" ng-show="loading">
+                <img src="../media/ring.gif">
+            </div>
+            <div id="location" ng-show="gotLocation">Your location is:
+                {{ulocation}}</div>
+            <div id="address" ng-show="gotAddress">Your address is:
+                {{uaddress}}</div>
+        </div>
+        <hr>
+        <div class="container" id="footer">
+            <table class="table table-borderless">
+                <tr class="table-borderless">
+                    <th>Heading 1</th>
+                    <th>Heading 2</th>
+                    <th>Heading 3</th>
+                    <th>Heading 4</th>
+                </tr>
+                <tr>
+                    <td>Item 1</td>
+                    <td>Item 1</td>
+                    <td>Item 1</td>
+                    <td>Item 1</td>
+                </tr>
+                <tr>
+                    <td>Item 2</td>
+                    <td>Item 2</td>
+                    <td>Item 2</td>
+                    <td>Item 2</td>
+                </tr>
+            </table>
+        </div>
+    </body>
 </html>
