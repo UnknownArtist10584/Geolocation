@@ -27,15 +27,15 @@
     </head>
     <body>
         <nav class="navbar navbar-default" role="navigation" id="navbar">
-            <div class="container">
-                <a class="navbar-brand">Home</a>
+            <div class="container" ng-controller="NavbarController">
+                <a href="#home" class="navbar-brand" ng-class="homeClass" ng-click="homeClicked()">Home</a>
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul ng-class="aboutClass">
                             <li>
-                                <a href="">Action</a>
+                                <a href="#about" ng-click="aboutClicked()">Action</a>
                             </li>
                             <li>
                                 <a href="">Another action</a>
@@ -85,18 +85,10 @@
                 </ul>
             </div>
         </nav>
-        <div class="container" id="main" ng-controller="GeolocationController">
-            <button type="button" class="btn btn-default" id="get-location-button" ng-click="geoProcess()">
-                <span class="glyphicon glyphicon-globe"></span>
-                Get my location
-            </button>
-            <div id="loader" ng-show="loading">
-                <img src="../media/ring.gif">
-            </div>
-            <div id="location" ng-show="gotAddress">Your location is:
-                {{ulocation}}</div>
-            <div id="address" ng-show="gotAddress">Your address is:
-                {{uaddress}}</div>
+        <div id="main">
+          <div ng-view>
+
+          </div>
         </div>
         <hr>
         <div class="container" id="footer">

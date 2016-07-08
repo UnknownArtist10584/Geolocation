@@ -1,4 +1,22 @@
-var app = angular.module('Geolocation', ['ngAnimate', 'ui.bootstrap']);
+var app = angular.module('Geolocation', ['ngAnimate', 'ui.bootstrap', 'ngRoute']);
+
+app.config(function($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'home.html',
+            controller: 'GeolocationController'
+        })
+
+    .when('/home', {
+        templateUrl: 'home.html',
+        controller: 'GeolocationController'
+    })
+
+    .when('/about', {
+        templateUrl: 'about.html',
+        controller: 'AboutController'
+    })
+})
 
 app.controller('GeolocationController', function($scope, $timeout) {
 
@@ -87,4 +105,21 @@ app.controller('GeolocationController', function($scope, $timeout) {
     }
 
 
+});
+
+app.controller('AboutController', function($scope) {
+    $scope.message = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+});
+
+app.controller('NavbarController', function($scope) {
+  $scope.homeClass = "navbar-brand active";
+  $scope.aboutClass = "dropdown-menu"
+  $scope.homeClicked = function() {
+      $scope.homeClass = "navbar-brand active";
+      $scope.aboutClass = "dropdown-menu";
+  };
+  $scope.aboutClicked = function() {
+    $scope.homeClass = "navbar-brand";
+    $scope.aboutClass = "dropdown-menu active";
+  };
 });

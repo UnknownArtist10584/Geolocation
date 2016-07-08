@@ -1,0 +1,13 @@
+<div class="container">
+    <button type="button" class="btn btn-default" id="get-location-button" ng-click="geoProcess()">
+        <span class="glyphicon glyphicon-globe"></span>
+        Get my location
+    </button>
+    <div id="loader" ng-show="loading">
+        <img src="../media/ring.gif">
+    </div>
+    <div id="location" ng-show="gotAddress">Your location is:
+        {{ulocation}}</div>
+    <div id="address" ng-show="gotAddress">Your address is:
+        {{uaddress}}</div>
+</div>
